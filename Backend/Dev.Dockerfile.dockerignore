@@ -1,0 +1,20 @@
+# Ignore all
+**
+
+# Add files and directories that should be included
+!database/**
+!interfaces/**
+!modules/**
+!routes/**
+!other/**
+!env.ts
+!main.ts
+!package-lock.json
+!package.json
+!tsconfig.json
+
+# Ignore unnecessary files
+**/*~
+**/*.log
+**/.DS_Store
+**/Thumbs.db

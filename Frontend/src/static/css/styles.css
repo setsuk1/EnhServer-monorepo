@@ -1,0 +1,116 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+}
+
+body.black {
+    background-color: #232323;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #333;
+    color: white;
+    z-index: 1000;
+}
+
+.navbar .title {
+    display: flex;
+    align-items: center;
+}
+
+.navbar .title svg {
+    width: 100px;
+    height: 30px;
+    margin-right: 10px;
+}
+
+.navbar .title svg:hover {
+    cursor: pointer;
+}
+
+.navbar .title h1 {
+    font-size: 1.5rem;
+}
+
+.navbar .nav-links {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+}
+
+.navbar .nav-links a {
+    color: white;
+    text-decoration: none;
+    font-size: 1rem;
+}
+
+.navbar .nav-links a:hover {
+    text-decoration: underline;
+}
+
+.navbar .nav-options {
+    display: flex;
+    gap: 10px;
+}
+
+.navbar .auth {
+    position: relative;
+}
+
+.navbar .auth .auth-not {
+    display: flex;
+    gap: 10px;
+}
+
+.navbar .auth a {
+    color: white;
+    text-decoration: none;
+    font-size: 1rem;
+    padding: 5px 10px;
+    border: 1px solid white;
+    border-radius: 5px;
+}
+
+.navbar .auth .dropdown {
+    position: absolute;
+    top: 30px;
+    right: 0;
+    background-color: #444;
+    border-radius: 5px;
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
+    white-space: nowrap;
+}
+
+.navbar .auth .dropdown a {
+    padding: 10px;
+    display: block;
+    color: white;
+    text-decoration: none;
+    text-align: center;
+}
+
+.navbar .auth .dropdown a:hover {
+    background-color: #555;
+}
+
+.content {
+    flex: 1;
+}

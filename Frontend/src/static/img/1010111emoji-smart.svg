@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="180" height="44" viewBox="0 0 180 44" version="1.1">
+    <mask id="mask-left-circle">
+        <circle cx="52.34375" cy="18.38" r="15" fill="white">
+            <animate attributeName="cx" values="40;64;40" dur="0.25s" repeatCount="indefinite" />
+            <animate attributeName="cy" values="6.7;30;6.7" dur="0.15s" repeatCount="indefinite" />
+            <animate attributeName="r" values="13;15;13" dur="0.75s" repeatCount="indefinite" />
+        </circle>
+    </mask>
+    <mask id="mask-right-circle">
+        <circle cx="127.1875" cy="18.38" r="13" fill="white">
+            <animate attributeName="cx" values="139;115;139" dur="0.25s" repeatCount="indefinite" />
+            <animate attributeName="cy" values="30;6.7;30" dur="0.15s" repeatCount="indefinite" />
+            <animate attributeName="r" values="15;13;15" dur="0.75s" repeatCount="indefinite" />
+        </circle>
+    </mask>
+    <text x="90" y="23" font-size="40" font-family="Microsoft JhengHei" fill="white" dominant-baseline="middle" text-anchor="middle">\(●ω●)/</text>
+    <text x="90" y="23" font-size="40" font-family="Microsoft JhengHei" fill="white" dominant-baseline="middle" text-anchor="middle">
+        <tspan
+        >\</tspan><tspan
+        >(</tspan><tspan fill="black" mask="url(#mask-left-circle)"
+        >●</tspan><tspan
+        >ω</tspan><tspan fill="black" mask="url(#mask-right-circle)"
+        >●</tspan><tspan
+        >)</tspan><tspan
+        >/</tspan>
+    </text>
+</svg>

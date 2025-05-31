@@ -1,0 +1,41 @@
+networks:
+  backend:
+
+volumes:
+  mariadb:
+
+services:
+  frontend:
+    build:
+      context: Frontend
+      dockerfile: ./Dockerfile
+    ports:
+      - 8800:80
+    networks:
+      - backend
+  
+  backend:
+    build:
+      context: Backend
+      dockerfile: ./Dockerfile
+    # command: tail -f /dev/null > /dev/null
+    environment:
+      - SRVADDR=0.0.0.0
+      - DB_ADDR=db
+      - DB_USER_PWD=abcabcabcabcabc
+      - RP_ID=enh.0807.date
+      - PROTOCOL="https://"
+    networks:
+      - backend
+    
+  db:
+    image: mariadb:lts
+    volumes:
+      - mariadb:/var/lib/mysql
+    networks:
+      - backend
+    environment:
+      - MARIADB_USER=EnhServerUser
+      - MARIADB_PASSWORD=abcabcabcabcabc
+      - MARIADB_DATABASE=EnhServer
+      - MARIADB_ROOT_PASSWORD=fghfghfghfghfghfghfghfghfgh

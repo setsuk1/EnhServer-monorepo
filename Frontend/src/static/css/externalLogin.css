@@ -1,0 +1,23 @@
+.section {
+    margin-bottom: 20px;
+}
+
+.account-button,
+.other-login-button,
+.guest-login-button {
+    width: 100%;
+    font-size: 16px;
+    color: white !important;
+}
+
+.account-button {
+    background-color: #4CAF50 !important;
+}
+
+.other-login-button {
+    background-color: #888 !important;
+}
+
+.guest-login-button {
+    background-color: #007BFF !important;
+}
