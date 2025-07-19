@@ -40,7 +40,7 @@ export class InputInfoFlow extends BaseFlowComponent<FlowSharedData, IInputInfoF
         ev.preventDefault();
 
         const account = this._dom.account.value;
-        const password = this._dom.account.value;
+        const password = this._dom.password.value;
 
         await this.checkInfo(account, password);
     }
