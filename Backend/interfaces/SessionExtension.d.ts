@@ -1,14 +1,11 @@
-import type { ISessionAccount } from "./Session/ISessionAccount.ts";
+import { ISessionAccount } from "./Session/ISessionAccount.ts";
 
 declare module "express-session" {
     interface SessionData {
-        account?: ISessionAccount[];
-        currentAccount?: number
+        accounts: ISessionAccount[];
     }
 
     interface SessionData {
-        registerChallenge?: string;
-        authenticateChallenge?: string;
-        authenticateOptions: {acc: string};
+        authenticateOptions?: { userId: number, account: string, challenge: string };
     }
 }

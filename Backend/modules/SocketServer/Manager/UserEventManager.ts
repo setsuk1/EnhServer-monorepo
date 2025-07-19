@@ -1,8 +1,8 @@
-import type { Socket } from "socket.io";
+import { Socket } from "socket.io";
 import { ServerEventList } from "../EventList/ServerEventList.js";
 import { UserEventTypeList } from "../EventList/UserEventTypeList.js";
-import type { SocketMessage } from "../Helper/SocketMessage.js";
-import type { SocketServer } from "../SocketServer.js";
+import { SocketMessage } from "../Helper/SocketMessage.js";
+import { SocketServer } from "../SocketServer.js";
 
 export class UserEventManager {
 
@@ -10,12 +10,12 @@ export class UserEventManager {
 
 	constructor(server: SocketServer) {
 		this._server = server;
-        this.setupListenerForEvt()
+		this.setupListenerForEvt()
 	}
 
-    setupListenerForEvt() {
-        this._server.emitter.on(ServerEventList.MANAGER.USER_EVT_MANAGER, this.parse, this);
-    }
+	setupListenerForEvt() {
+		this._server.emitter.on(ServerEventList.MANAGER.USER_EVT_MANAGER, this.parse, this);
+	}
 
 	parse(socket: Socket, data: SocketMessage<any>, callback: Function) {
 		switch (data.type) {
@@ -30,6 +30,13 @@ export class UserEventManager {
 			case UserEventTypeList.MSG.BROADCAST_IN_ROOM:
 			case UserEventTypeList.MSG.BROADCAST_TO_ALL:
 				this._server.emitter.emit(ServerEventList.MANAGER.MSG_MANAGER, socket, data, callback);
+				break;
+			case UserEventTypeList.VAR.DELETE_VALUE:
+			case UserEventTypeList.VAR.GET_VALUE:
+			case UserEventTypeList.VAR.SET_VALUE:
+			case UserEventTypeList.VAR.LIST_TABLE:
+			case UserEventTypeList.VAR.LIST_VALUE:
+				this._server.emitter.emit(ServerEventList.MANAGER.VARTABLE_MANAGER, socket, data, callback);
 				break;
 		}
 	}

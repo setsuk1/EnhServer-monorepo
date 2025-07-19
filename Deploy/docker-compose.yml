@@ -1,0 +1,59 @@
+networks:
+  backend:
+
+volumes:
+  mariadb:
+  redis:
+
+services:
+  frontend:
+    build:
+      context: ../Frontend
+      dockerfile: Dockerfile
+    ports:
+      - 8080:80
+    networks:
+      - backend
+    depends_on:
+      - backend
+    restart: unless-stopped
+  
+  backend:
+    build:
+      context: ../Backend
+      dockerfile: Dockerfile
+    networks:
+      - backend
+    env_file:
+      - backend.env
+    depends_on:
+      - db
+      - redis
+    restart: unless-stopped
+    
+  db:
+    image: mariadb:lts
+    volumes:
+      - mariadb:/var/lib/mysql
+    networks:
+      - backend
+    env_file:
+      - db.env
+    restart: unless-stopped
+
+  redis:
+    restart: always
+    image: redis:alpine
+    volumes:
+      - redis:/data
+
+  # Alternatively, you can use dragonflydb, which is compatible with redis.
+  # redis:
+  #   image: docker.dragonflydb.io/dragonflydb/dragonfly
+  #   ulimits:
+  #     memlock: -1
+  #   volumes:
+  #     - redis:/data
+  #   networks:
+  #     - backend
+  #   restart: unless-stopped

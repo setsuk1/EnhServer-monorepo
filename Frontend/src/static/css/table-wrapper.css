@@ -1,0 +1,85 @@
+.table-wrapper {
+    min-width: 400px;
+    margin: 0 auto;
+    position: relative;
+    background-color: #1f1f1f;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+}
+
+.table-wrapper .arc {
+    height: 30px;
+    background-color: #1f1f1f;
+}
+
+.table-wrapper .arc-top {
+    border-radius: 100% 100% 0 0;
+}
+
+.table-wrapper .arc-bottom {
+    border-radius: 0 0 100% 100%;
+}
+
+.table-wrapper table {
+    width: 100%;
+    max-width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    background-color: #1e1e1e;
+    color: #ffffff;
+    overflow: hidden;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.table-wrapper caption {
+    font-size: 1.35rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    background: linear-gradient(to right, #1c1c1c, #222222);
+    text-align: center;
+    padding: 1rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.table-wrapper th,
+.table-wrapper td {
+    text-align: left;
+}
+
+.table-wrapper caption,
+.table-wrapper th,
+.table-wrapper td {
+    padding: 0.75rem 1rem;
+    white-space: normal;
+    word-wrap: break-word;
+    word-break: break-word;
+    overflow-wrap: break-word;
+}
+
+.table-wrapper thead {
+    background: linear-gradient(to bottom, #2e2e2e, #262626);
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    border-bottom: 1px solid #3c3c3c;
+}
+
+.table-wrapper thead th {
+    border-bottom: 1px solid #444;
+    padding-top: 0.85rem;
+    padding-bottom: 0.85rem;
+}
+
+.table-wrapper tbody tr:nth-child(even) {
+    background-color: #2b2b2b;
+}
+
+.table-wrapper tbody tr:nth-child(odd) {
+    background-color: #1f1f1f;
+}
+
+.table-wrapper tbody tr:hover {
+    background-color: #2a3d5c;
+    transition: background-color 0.2s ease-in-out;
+}

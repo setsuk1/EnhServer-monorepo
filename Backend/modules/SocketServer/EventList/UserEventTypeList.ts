@@ -16,8 +16,11 @@ export const UserEventTypeList = {
 		QUERY: 22,
 	},
 	VAR: {
-		SET: 101,
-		DELETE: 102,
-		GET: 103
+		SET_VALUE: 101,
+		DELETE_VALUE: 102,
+		GET_VALUE: 103,
+		LIST_VALUE: 104,
+
+		LIST_TABLE: 111,
 	}
 }

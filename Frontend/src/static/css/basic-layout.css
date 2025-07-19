@@ -1,0 +1,10 @@
+.basic-layout {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.basic-layout>.content {
+    flex: 1;
+    color: #ffffff;
+}

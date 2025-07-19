@@ -1,0 +1,278 @@
+.nav-bar {
+    position: sticky;
+    top: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem 1.5rem;
+    background-color: #313131;
+    color: white;
+    flex-wrap: wrap;
+    user-select: none;
+    gap: 1rem;
+    z-index: 10000;
+}
+
+.nav-bar a {
+    color: white;
+    text-decoration: none;
+}
+
+.nav-app-info {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.nav-logo,
+.nav-logo svg {
+    height: 30px;
+    width: 100px;
+    display: block;
+}
+
+.nav-title {
+    font-size: 1.25rem;
+    font-weight: bold;
+}
+
+.nav-links {
+    display: flex;
+    gap: 1rem;
+}
+
+.nav-links a {
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.nav-links a:hover {
+    color: #007bff;
+}
+
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+.nav-options .material-icons {
+    cursor: pointer;
+    display: block;
+}
+
+.nav-auth {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.nav-auth-not a {
+    margin-right: 0.5rem;
+    text-decoration: none;
+}
+
+.nav-btn {
+    padding: 0.45rem 1rem;
+    font-size: 0.95rem;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    background-color: transparent;
+    color: #eee;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.2s, border-color 0.2s;
+}
+
+.nav-btn:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-color: #fff;
+}
+
+.nav-auth-success {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.nav-user-area {
+    position: relative;
+    display: inline-block;
+    padding: 5px 0;
+}
+
+.nav-user-area:hover .nav-user-dropdown {
+    display: block;
+}
+
+.nav-nickname-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.4rem 0.75rem;
+    background: transparent;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.nav-nickname-wrapper {
+    background: transparent;
+    border: none;
+    color: #fff;
+    padding: 0.4rem 0.75rem;
+    border-radius: 6px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.nav-nickname-wrapper:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.nav-user-dropdown {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: #222;
+    border: 1px solid #444;
+    border-radius: 6px;
+    padding: 0.5rem 0;
+    min-width: 160px;
+    z-index: 1000;
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.25);
+    display: none;
+}
+
+.nav-user-dropdown.align-left {
+    left: 0;
+    right: auto;
+}
+
+.nav-user-dropdown a {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.5rem 1rem;
+    text-decoration: none;
+    color: inherit;
+}
+
+.nav-user-dropdown a.disabled {
+    pointer-events: none;
+    color: #888;
+    opacity: 0.6;
+    cursor: default;
+}
+
+.nav-user-dropdown a:hover {
+    background-color: #333;
+}
+
+.nav-switch-account-wrapper {
+    position: relative;
+}
+
+.nav-switch-account-wrapper:hover .nav-account-list {
+    display: block;
+}
+
+.nav-account-list {
+    position: absolute;
+    top: 0;
+    right: 100%;
+    background-color: #222;
+    border: 1px solid #444;
+    border-radius: 6px;
+    padding: 0.5rem 0;
+    min-width: 200px;
+    max-width: 300px;
+    z-index: 1000;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    display: none;
+    color: white;
+}
+
+.nav-account-list.align-left {
+    left: 100%;
+    right: auto;
+}
+
+.nav-account-item:last-child {
+    border-bottom: none;
+}
+
+.nav-account-item {
+    display: flex;
+    align-items: center;
+    padding: 8px 14px;
+    border-bottom: 1px solid #333;
+
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.2s, box-shadow 0.2s;
+    background-color: transparent;
+}
+
+.nav-account-item:hover:not(.current) {
+    background-color: #444;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+    color: #fff;
+}
+
+.nav-account-item:active:not(.current) {
+    background-color: #222;
+    box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.6);
+}
+
+.nav-account-item.current {
+    background-color: #2c2c2c;
+    color: #aaa;
+    cursor: default;
+    box-shadow: inset 0 0 6px rgba(255, 255, 255, 0.1);
+}
+
+.nav-account-item.login-other {
+    justify-content: center;
+    font-weight: 500;
+    color: #aaa;
+    font-style: italic;
+    border-top: 1px solid #444;
+    margin-top: 4px;
+}
+
+.account-item.login-other:hover {
+    background-color: #3a3a3a;
+    color: #fff;
+}
+
+.nav-account-nickname {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.nav-account-status {
+    margin-left: auto;
+    white-space: nowrap;
+    font-weight: bold;
+    font-size: 0.85rem;
+}
+
+.logged-in.current .nav-account-status {
+    color: #4fc3f7;
+}
+
+.logged-in .nav-account-status {
+    color: #81c784;
+}
+
+.logged-out .nav-account-status {
+    color: #e57373;
+}

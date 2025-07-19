@@ -1,5 +1,3 @@
-const NOT_FOUND = -1;
-
 export class UidTable {
     protected generateChars: string = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";;
     protected _map = new Map<string, any>();
@@ -44,15 +42,15 @@ export class UidTable {
         while (uid.length < totalLen)
             uid += this.newChar();
 
-        for(;;) {
+        for (; ;) {
             let flag = true;
-            for(let i of uids) {
-                if(uid == i) {
+            for (let i of uids) {
+                if (uid == i) {
                     uid += this.newChar();
                     flag = false;
                 }
             }
-            if(flag)
+            if (flag)
                 break;
         }
 

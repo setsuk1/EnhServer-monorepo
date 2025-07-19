@@ -1,0 +1,64 @@
+.normal-input-wrapper {
+    display: flex;
+    align-items: center;
+    padding: 1rem 0;
+}
+
+.normal-input-wrapper.disabled {
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+.normal-input-wrapper .input-block {
+    display: flex;
+    flex-direction: column;
+    margin-right: 1rem;
+}
+
+.normal-input-wrapper .input-title {
+    color: #cccccc;
+    margin-bottom: 0.375rem;
+}
+
+.normal-input-wrapper .text-input {
+    width: 220px;
+    border: 1px solid #444;
+    border-radius: 6px;
+    padding: 0.625rem 0.75rem;
+    background-color: #2c2c2c;
+    color: #f5f5f5;
+    transition: border-color 0.3s, background-color 0.3s;
+}
+
+.normal-input-wrapper .text-input:focus {
+    border-color: #4fc3f7;
+    background-color: #1e1e1e;
+    outline: none;
+}
+
+.normal-input-wrapper .text-input[readonly] {
+    color: #aaa;
+    border-color: #555;
+    background-color: #2c2c2c;
+}
+
+.normal-input-wrapper .edit-button {
+    padding: 0.5rem 1rem;
+    background-color: #3b82f6;
+    color: white;
+    border: none;
+    border-radius: 0.375rem;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.1s, box-shadow 0.2s;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.4);
+}
+
+.normal-input-wrapper .edit-button:hover {
+    background-color: #2563eb;
+}
+
+.normal-input-wrapper .edit-button:active {
+    background-color: #1e4fcc;
+    transform: scale(0.97);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}

@@ -1,0 +1,16 @@
+{
+  "name": "enhserver-frontend",
+  "version": "0.0.2",
+  "description": "",
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc --watch"
+  },
+  "keywords": [],
+  "author": "EnhProject",
+  "license": "ISC",
+  "devDependencies": {
+    "@simplewebauthn/browser": "^13.1.0",
+    "typescript": "^5.8.3"
+  }
+}

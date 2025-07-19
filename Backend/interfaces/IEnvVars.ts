@@ -7,12 +7,19 @@ export interface IEnvVars {
 
     SOCKET_PATH?: string
     SRV_ADDR?: string
-    PORT?: number;
+    SRV_PORT?: number;
+    SESSION_SECRET?: string;
 
     RP_NAME?: string;
     RP_ID?: string;
     PROTOCOL?: string;
-    ORIGIN?(): string;
 
     JWT_SECRET?: string;
+
+    JWT_ISSUER?: string;
+    JWT_AUDIENCE?: string;
+    REDIS_ADDRESS?: string;
+    REDIS_PORT?: number;
+
+    LOG_LEVEL?: number;
 }

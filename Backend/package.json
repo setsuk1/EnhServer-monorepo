@@ -1,6 +1,6 @@
 {
   "name": "enhserver",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "main": "main.js",
   "bin": "out/",
   "type": "module",
@@ -14,17 +14,19 @@
   "description": "",
   "dependencies": {
     "@simplewebauthn/server": "^13.1.1",
+    "@socket.io/redis-adapter": "^8.3.0",
     "body-parser": "^2.2.0",
+    "connect-redis": "^9.0.0",
     "express": "^4.19.2",
     "express-session": "^1.18.1",
     "jose": "^6.0.11",
     "mariadb": "^3.4.2",
+    "redis": "^5.5.6",
     "socket.io": "^4.8.1"
   },
   "devDependencies": {
     "@types/express": "^4.17.21",
     "@types/express-session": "^1.18.1",
-    "tsc": "^2.0.4",
     "typescript": "^5.6.3"
   }
 }

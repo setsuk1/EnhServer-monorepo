@@ -1,93 +1,100 @@
-import type { PoolConnection } from "mariadb";
-import type { ISchemaUpdater } from "../interfaces/ISchemaUpdater.js";
-import { tableList } from "./Database.js";
+import { PoolConnection } from "mariadb";
+import { ISchemaUpdater } from "../interfaces/ISchemaUpdater.js";
+import { Logger } from "../modules/Console/Logger.js";
+import { accountOptions } from "./schema/accountOptions.js";
+import { accounts } from "./schema/accounts.js";
+import { groupContent } from "./schema/groupContent.js";
+import { groupList } from "./schema/groupList.js";
+import { jwtToken } from "./schema/jwtToken.js";
+import { passkey } from "./schema/passkey.js";
+import { permission } from "./schema/permission.js";
+import { permissionEntry } from "./schema/permissionEntry.js";
+import { schema } from "./schema/schema.js";
+import { varTableData } from "./schema/varTableData.js";
+import { varTableList } from "./schema/varTableList.js";
 
 export const schemas: ISchemaUpdater[] = [
     {
         version: '2025-05-10',
-        func: async function (conn: PoolConnection) {
-            console.log(`Create schema [${this.version}]`)
-
-            console.log("    - Create schema table");
-            return conn.query(`
-            CREATE TABLE if not exists ${tableList.SCHEMA} (
-                id INT PRIMARY KEY AUTO_INCREMENT,
-                VERSION_DATE VARCHAR(50) NOT NULL
-            )`);
+        async func(conn: PoolConnection, logger: Logger) {
+            logger.println("Create schema table");
+            return schema.CREATE(conn);
         }
     },
     {
         version: "2025-05-11",
-        func: async function (conn: PoolConnection) {
-            console.log(`Create schema [${this.version}]`)
+        async func(conn: PoolConnection, logger: Logger) {
+            logger.println("Create account table");
+            await accounts.CREATE(conn);
 
-            console.log("    - Create account table");
-            await conn.query(`
-            -- Basic account schema creation
-            CREATE TABLE IF NOT EXISTS ${tableList.ACCOUNTS} (
-                id          INT             AUTO_INCREMENT,
-                account     NVARCHAR(50)    NOT NULL,
-                password    NVARCHAR(50),       -- Use 50 if longer passwords may be used)
-                created_at  TIMESTAMP       DEFAULT CURRENT_TIMESTAMP,
-                PRIMARY KEY (id)
-            )`)
+            logger.println("Create passkey table");
+            await passkey.CREATE(conn);
 
-            console.log("    - Create passkey table");
-            await conn.query(`
-            CREATE TABLE IF NOT EXISTS ${tableList.PASSKEY} (
-                cred_id             VARCHAR(255) PRIMARY KEY,      -- Base64Url string representation
-                cred_public_key     BLOB,                          -- Public key for authentication
-                internal_user_id    INT REFERENCES ${tableList.ACCOUNTS}(id),   -- Your own user ID integer  
-                counter             INT DEFAULT 0,                 -- Use INTEGER if large numbers needed
-                transports          VARCHAR(255),                  -- e.g., "usb,nfc"
-                created_at          TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-                last_used           TIMESTAMP NULL                  -- Nullable if not used yet
-            )`)
+            logger.println("Create account options table");
+            await accountOptions.CREATE(conn);
 
-            console.log("    - Create account options table");
-            await conn.query(`
-            CREATE TABLE IF NOT EXISTS ${tableList.ACCOUNT_OPTIONS} (
-                id              INT,         -- Primary key (same as accounts.id) 
-                allowPassword   BOOLEAN,
-                nickname        VARCHAR(50),
-            
-                PRIMARY KEY (id),
-                FOREIGN KEY (id) REFERENCES ${tableList.ACCOUNTS}(id)
-            )`)
+            logger.println("Create Variable Table List table");
+            await varTableList.CREATE(conn);
 
-            console.log("    - Create Variable Table List table");
-            await conn.query(`
-            CREATE TABLE IF NOT EXISTS ${tableList.VAR_TABLE_LIST} (
-                id          INT     AUTO_INCREMENT,
-                belong_acc  INT,
-                name        NVARCHAR(50) UNIQUE NOT NULL,
+            logger.println("Create Variable Table Data table");
+            await varTableData.CREATE(conn);
 
-                PRIMARY KEY (id),
-                FOREIGN KEY (belong_acc) REFERENCES ${tableList.ACCOUNTS}(id)
-            )`)
-
-            console.log("    - Create Variable Table Data table");
-            await conn.query(`
-            CREATE TABLE IF NOT EXISTS ${tableList.VAR_TABLE_DATA} (
-                id          INT     AUTO_INCREMENT,
-                table_id    INT,
-                varKey         NVARCHAR(16384) NOT NULL,
-                varValue       BLOB,
-
-                PRIMARY KEY (id),
-                FOREIGN KEY (table_id) REFERENCES ${tableList.VAR_TABLE_LIST}(id)
-            )`)
-
-            console.log("    - Create JSON Web Token (RFC 7519) table");
-            await conn.query(`
-            CREATE TABLE IF NOT EXISTS ${tableList.JWT_TOKEN} (
-                id          INT     AUTO_INCREMENT,
-                acc_id      INT,
-                tokenString VARCHAR(8192) NOT NULL,
-
-                PRIMARY KEY (id),
-                FOREIGN KEY (acc_id) REFERENCES ${tableList.ACCOUNTS}(id)
-            )`)
+            logger.println("Create JSON Web Token (RFC 7519) table");
+            await jwtToken.CREATE(conn);
         }
     },
+    {
+        version: "2025-06-09",
+        async func(conn: PoolConnection, logger: Logger) {
+            logger.println("Drop account options table");
+            await accountOptions.DROP(conn);
+            
+            logger.println("Remove UNIQUE for name of variable table");
+            await varTableList.REMOVE_UNIQUE_NAME(conn);
+            
+            logger.println('Add column "created_at" to variable table');
+            await varTableList.ADD_COLUMN_CREATED_AT(conn);
+
+            logger.println("Add UNIQUE for keys in variable table");
+            await varTableData.ADD_UNIQUE_FOR_ID_AND_KEY(conn);
+
+            logger.println("Add nickname for passkey table");
+            await passkey.ADD_NICKNAME(conn);
+            
+            logger.println('Add column "id" and change primary key from "cred_id" to "id"');
+            await passkey.ADD_COLUMN_ID_AND_CHANGE_PRIMARY_KEY(conn);
+            
+            logger.println("Add nickname for token table");
+            await jwtToken.ADD_NICKNAME(conn);
+
+            logger.println('Add column "nickname" and "allowPassword" to account table');
+            await accounts.ADD_COLUMN_NICKNAME_AND_ALLOW_PASSWORD(conn);
+
+            logger.println('Modify column "account" and "password" to NVARCHAR(64) in accounts table');
+            await accounts.MODIFY_COLUMN_ACCOUNT_AND_PASSWORD(conn);
+
+            logger.println('Change column name "name" to "nickname" for variable table list');
+            await varTableList.CHANGE_COLUMN_NAME(conn);
+
+            logger.println("Change foreign key to add cascade on delete and update");
+            await passkey.MODIFY_FOREIGN_KEY_FOR_USER_ID(conn);
+            await varTableList.MODIFY_FOREIGN_KEY_FOR_BELONG_ACC(conn);
+            await varTableData.MODIFY_FOREIGN_KEY_FOR_TABLE_ID(conn);
+            await jwtToken.MODIFY_FOREIGN_KEY_FOR_ACCOUNT_ID(conn);
+
+            
+            logger.println("Create new tables......");
+            logger.println("Create group list table");
+            await groupList.CREATE(conn);
+
+            logger.println("Create group content table");
+            await groupContent.CREATE(conn);
+
+            logger.println("Create permission entry table");
+            await permissionEntry.CREATE(conn);
+
+            logger.println("Create permission table");
+            await permission.CREATE(conn);
+        },
+    }
 ]

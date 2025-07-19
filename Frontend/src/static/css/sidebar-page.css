@@ -1,0 +1,24 @@
+.sidebar-page {
+    display: flex;
+    flex-direction: row;
+}
+
+.sidebar-page>.sidebar {
+    user-select: none;
+}
+
+.sidebar-page>.content {
+    overflow: auto;
+}
+
+.sidebar-page>.content>.container {
+    width: fit-content;
+    padding: 0.5rem;
+    padding-left: 2.5rem;
+}
+
+.sidebar-page .flow {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}

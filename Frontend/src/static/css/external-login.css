@@ -1,0 +1,77 @@
+.external-login {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    justify-content: center;
+    align-items: center;
+}
+
+.external-login .container {
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 300px;
+    min-height: 150px;
+}
+
+.external-login button {
+    padding: 10px 20px;
+    margin: 10px 0;
+    background-color: #008cba;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.external-login button.full {
+    width: 100%;
+}
+
+.external-login .account-button,
+.external-login .other-login-button,
+.external-login .guest-login-button {
+    font-size: 1.1rem;
+    color: white !important;
+}
+
+.external-login .account-button {
+    background-color: #4CAF50 !important;
+}
+
+.external-login .account-button:hover {
+    background-color: #45A049 !important;
+}
+
+.external-login .account-button:active {
+    background-color: #3e8e41 !important;
+    transform: scale(0.98);
+}
+
+.external-login .other-login-button {
+    background-color: #888 !important;
+}
+
+.external-login .other-login-button:hover {
+    background-color: #777 !important;
+}
+
+.external-login .other-login-button:active {
+    background-color: #666 !important;
+    transform: scale(0.98);
+}
+
+.external-login .guest-login-button {
+    background-color: #007BFF !important;
+}
+
+.external-login .guest-login-button:hover {
+    background-color: #006FDD !important;
+}
+
+.external-login .guest-login-button:active {
+    background-color: #005CBF !important;
+    transform: scale(0.98);
+}

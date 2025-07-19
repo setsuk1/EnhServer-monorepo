@@ -1,6 +1,6 @@
 # Stage 1: Build
 FROM node:lts-slim AS base
-ENV NODE_ENV=production
+# ENV NODE_ENV=production
 
 WORKDIR /app
 

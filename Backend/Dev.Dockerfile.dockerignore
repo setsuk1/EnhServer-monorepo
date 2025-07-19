@@ -8,6 +8,7 @@
 !routes/**
 !other/**
 !env.ts
+!instanceExport.ts
 !main.ts
 !package-lock.json
 !package.json
